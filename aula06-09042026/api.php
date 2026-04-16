@@ -6,6 +6,7 @@
 
     switch ($metodo) {
         case 'GET':
+            
             echo "Aqui ações de método GET";
             break;
         

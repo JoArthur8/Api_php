@@ -21,26 +21,33 @@
         case 'GET':
 
             // echo "Aqui ações de método GET";
-            echo json_encode($usuarios);
+            echo json_encode($usuarios, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             break;
         
         case 'POST':
             // echo "Aqui ações de método POST";
             $dados = json_decode(file_get_contents('php://input'), true);
             // print_r($dados);
+            if (!isset($dados["id"]) || !isset($dados["nome"]) || !isset($dados["email"])){
+                http_response_code(400);
+                echo json_encode(["erro" => "Dados Imcompletos. ", JSON_UNESCAPED_UNICODE]);
+                exit;
+            }
             $novoUsuario = [
                 "id" => $dados["id"],
                 "nome" => $dados["nome"],
                 "email" => $dados["email"]
             ];
-            array_push($usuarios,$novoUsuario);
-            // file_put_contents($arquivo,$usuarios);
-            echo json_encode('Usuario inserido');
-            print_r($usuarios);
+            $usuarios[] = $novoUsuario;
+            // array_push($usuarios,$novoUsuario);
+            file_put_contents($arquivo,json_encode($usuarios, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+            echo json_encode(["mensagem" => "Usuário inserido com sucesso!","usuarios" => $usuarios],JSON_UNESCAPED_UNICODE);
+            // print_r($usuarios);
             break;
         
         default:
-            echo "Método não encontrado";
+            http_response_code(405);
+            echo json_encode(["erro" => "Método não permitido!"], JSON_UNESCAPED_UNICODE);
             break;
     }
 

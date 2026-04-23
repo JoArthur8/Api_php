@@ -1,1 +1,17 @@
-[{"id":1,"nome":"Maria Souza","email":"maria@email.com"},{"id":2,"nome":"Jo\u00e3o Silva","email":"joao@email.com"}]
+[
+    {
+        "id": 1,
+        "nome": "Maria Souza",
+        "email": "maria@email.com"
+    },
+    {
+        "id": 2,
+        "nome": "João Silva",
+        "email": "joao@email.com"
+    },
+    {
+        "id": 3,
+        "nome": "Roberto Carlos",
+        "email": "roberto@email.com"
+    }
+]
